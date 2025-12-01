@@ -26,7 +26,7 @@ const path = require("path");
 // === CONFIGURE === //
 // MUHIM: Bu joyni Render/Replit sirlaridan olish uchun o'zgartiring!
 // const TOKEN = "8155964283:AAFgwyG6r35FFKcr_B1i3x8RTB57JFKyk5k"; // <-- o'zgartiring
-const TOKEN = process.env.TELEGRAM_TOKEN; // <--- RENDER/REPLIT UCHUN SHU QOLISHI KERAK
+const TOKEN = "8155964283:AAFgwyG6r35FFKcr_B1i3x8RTB57JFKyk5k"; // <--- RENDER/REPLIT UCHUN SHU QOLISHI KERAK
 const ADMINS = [7397994103 /*, boshqa admin id lar qo'shish */]; // <-- admin id larini qo'shing
 const USERS_FILE = path.join(__dirname, "users.json");
 const SCHEDULE_FILE = path.join(__dirname, "schedules.json");
