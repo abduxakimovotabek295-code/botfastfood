@@ -24,7 +24,9 @@ const fs = require("fs");
 const path = require("path");
 
 // === CONFIGURE === //
-const TOKEN = "8155964283:AAFgwyG6r35FFKcr_B1i3x8RTB57JFKyk5k"; // <-- o'zgartiring
+// MUHIM: Bu joyni Render/Replit sirlaridan olish uchun o'zgartiring!
+// const TOKEN = "8155964283:AAFgwyG6r35FFKcr_B1i3x8RTB57JFKyk5k"; // <-- o'zgartiring
+const TOKEN = process.env.TELEGRAM_TOKEN; // <--- RENDER/REPLIT UCHUN SHU QOLISHI KERAK
 const ADMINS = [7397994103 /*, boshqa admin id lar qo'shish */]; // <-- admin id larini qo'shing
 const USERS_FILE = path.join(__dirname, "users.json");
 const SCHEDULE_FILE = path.join(__dirname, "schedules.json");
@@ -50,6 +52,16 @@ const FAST_FOOD_MENU = [
   ["Hot Dog 🌭", "Kartoshka Fri 🍟"],
   ["🔙 Asosiy Menyuga Qaytish"],
 ];
+
+// --- RASMLAR URL'LARI (SIZNING KODINGIZGA QO'SHILDI) ---
+const PRODUCT_IMAGES = {
+  "Burger 🍔": "https://imageproxy.wolt.com/assets/673207b8e797795fa38396cd",
+  "Pizza 🍕":
+    "https://avatars.mds.yandex.net/get-altay/7725442/2a000001842e11c9b93066f3027516956721/XXL_height",
+  "Hot Dog 🌭":
+    "https://www.tastingtable.com/img/gallery/turn-sweet-hawaiian-rolls-into-crowd-pleasing-mini-chili-dogs/l-intro-1757816360.jpg",
+  "Kartoshka Fri 🍟": "https://i.ytimg.com/vi/ZuSVDbHHCro/maxresdefault.jpg",
+};
 
 // Simple FAQ (kalit so'z -> javob)
 const FAQ = [
@@ -374,30 +386,37 @@ bot.on("message", async (msg) => {
         sendFastFoodMenu(chatId);
         return;
 
-      // Fast Food Menu Tugmalariga Javob (return qo'shildi)
+      // **********************************************
+      // * YARATILGAN FAST FOOD MENYU TUGMALARIGA JAVOB *
+      // **********************************************
+
       case "Burger 🍔":
-        await bot.sendMessage(
-          chatId,
-          "🍔 Burgerlar bo'limi. Klassik, chizburger va boshqalar..."
-        );
+        await bot.sendPhoto(chatId, PRODUCT_IMAGES["Burger 🍔"], {
+          caption:
+            "🍔 **Burgerlar bo'limi.** Klassik, chizburger, qora, go'shtli va boshqalar.\n\n_Narxlar va yetkazib berish shartlari bo'yicha admin bilan bog'laning._",
+          parse_mode: "Markdown",
+        });
         return;
       case "Pizza 🍕":
-        await bot.sendMessage(
-          chatId,
-          "🍕 Pizzalar bo'limi. Pepperoni, Margarita, tovuqli va boshqalar..."
-        );
+        await bot.sendPhoto(chatId, PRODUCT_IMAGES["Pizza 🍕"], {
+          caption:
+            "🍕 **Pizzalar bo'limi.** Pepperoni, Margarita, Sezar, Tovuqli va boshqa turdagi pizzalar.\n\n_Narxlar va yetkazib berish shartlari bo'yicha admin bilan bog'laning._",
+          parse_mode: "Markdown",
+        });
         return;
       case "Hot Dog 🌭":
-        await bot.sendMessage(
-          chatId,
-          "🌭 Hot Doglar bo'limi. Har xil turdagi hot doglar mavjud."
-        );
+        await bot.sendPhoto(chatId, PRODUCT_IMAGES["Hot Dog 🌭"], {
+          caption:
+            "🌭 **Hot Doglar bo'limi.** Klassik, Meksikancha, Mini Hot Doglar mavjud.\n\n_Narxlar va yetkazib berish shartlari bo'yicha admin bilan bog'laning._",
+          parse_mode: "Markdown",
+        });
         return;
       case "Kartoshka Fri 🍟":
-        await bot.sendMessage(
-          chatId,
-          "🍟 Kartoshka Fri bo'limi. Kichik, o'rta, katta porsiyalar."
-        );
+        await bot.sendPhoto(chatId, PRODUCT_IMAGES["Kartoshka Fri 🍟"], {
+          caption:
+            "🍟 **Kartoshka Fri bo'limi.** Kichik, o'rta, katta porsiyalar.\n\n_Narxlar va yetkazib berish shartlari bo'yicha admin bilan bog'laning._",
+          parse_mode: "Markdown",
+        });
         return;
 
       case "🔙 Asosiy Menyuga Qaytish":
